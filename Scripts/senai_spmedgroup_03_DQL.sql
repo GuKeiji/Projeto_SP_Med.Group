@@ -36,7 +36,7 @@ GO
 RETURNS TABLE
      AS
  RETURN (
-          SELECT @tituloEspec AS especializacao, COUNT(idEspecializacao) [Código do Médico]
+          SELECT @tituloEspec AS especializacao, COUNT(idEspecializacao) [Número de Médicos]
 		    FROM ESPECIALIZACAO
 		   WHERE tituloEspecializacao LIKE '%' + @tituloEspec + '%'
         )
