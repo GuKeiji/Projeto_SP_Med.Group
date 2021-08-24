@@ -47,7 +47,7 @@ GO
 
 --Criou uma função para que retorne a idade do usuário a partir de uma determinada stored procedure
 CREATE PROCEDURE  IdadePaciente
-@idade VARCHAR(20)
+ @nome VARCHAR(20)
     AS
  BEGIN
 SELECT nome, DATEDIFF(YEAR,dataNascimento,GETDATE())
@@ -55,7 +55,7 @@ SELECT nome, DATEDIFF(YEAR,dataNascimento,GETDATE())
   FROM USUARIO U
  INNER JOIN PACIENTE P
     ON U.idUsuario = P.idUsuario
- WHERE nome = @idade
+ WHERE nome = @nome
    END
 GO
 
