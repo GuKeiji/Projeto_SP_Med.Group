@@ -33,7 +33,8 @@ VALUES ('2','Ligia','ligia@gmail.com','ligia123'),
 	   ('2','Mariana','mariana@outlook.com','mariana723'),
 	   ('1','Ricardo Lemos','ricardo.lemos@spmedicalgroup.com.br','ricardo813'),
 	   ('1','Roberto Possarle','roberto.possarle@spmedicalgroup.com.br','roberto913'),
-	   ('1','Helena Strada','helena.souza@spmedicalgroup.com.br','helena1013')
+	   ('1','Helena Strada','helena.souza@spmedicalgroup.com.br','helena1013'),
+	   ('3','Jeremias','jere@hotmail.com','jere5236')
 GO
 
 --MEDICO
