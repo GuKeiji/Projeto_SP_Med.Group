@@ -18,8 +18,9 @@ namespace senai.sp_med_group.webApi.Context
         {
         }
 
-        public virtual DbSet<Consulta> Consultas { get; set; }
+        public virtual DbSet<Consultum> Consulta { get; set; }
         public virtual DbSet<Especializacao> Especializacaos { get; set; }
+        public virtual DbSet<Imagemusuario> Imagemusuarios { get; set; }
         public virtual DbSet<Instituicao> Instituicaos { get; set; }
         public virtual DbSet<Medico> Medicos { get; set; }
         public virtual DbSet<Paciente> Pacientes { get; set; }
@@ -31,7 +32,7 @@ namespace senai.sp_med_group.webApi.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Data Source=PC-GAMER-GUKEIJ\\SQLEXPRESS; Initial Catalog=SP_MED_GROUP_KEIJI; user id=sa; pwd=senai@132;");
             }
         }
@@ -40,7 +41,7 @@ namespace senai.sp_med_group.webApi.Context
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AS");
 
-            modelBuilder.Entity<Consulta>(entity =>
+            modelBuilder.Entity<Consultum>(entity =>
             {
                 entity.HasKey(e => e.IdConsulta)
                     .HasName("PK__CONSULTA__CA9C61F52D0FF1A0");
@@ -99,6 +100,45 @@ namespace senai.sp_med_group.webApi.Context
                     .HasMaxLength(70)
                     .IsUnicode(false)
                     .HasColumnName("tituloEspecializacao");
+            });
+
+            modelBuilder.Entity<Imagemusuario>(entity =>
+            {
+                entity.ToTable("IMAGEMUSUARIO");
+
+                entity.HasIndex(e => e.IdUsuario, "UQ__IMAGEMUS__645723A7CF1DA4B1")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Binario)
+                    .IsRequired()
+                    .HasColumnName("binario");
+
+                entity.Property(e => e.DataInclusao)
+                    .HasColumnType("datetime")
+                    .HasColumnName("data_inclusao")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
+
+                entity.Property(e => e.MimeType)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("mimeType");
+
+                entity.Property(e => e.NomeArquivo)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false)
+                    .HasColumnName("nomeArquivo");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithOne(p => p.Imagemusuario)
+                    .HasForeignKey<Imagemusuario>(d => d.IdUsuario)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__IMAGEMUSU__idUsu__70DDC3D8");
             });
 
             modelBuilder.Entity<Instituicao>(entity =>

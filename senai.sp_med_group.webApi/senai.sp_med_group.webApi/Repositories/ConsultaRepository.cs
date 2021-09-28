@@ -15,38 +15,38 @@ namespace senai.sp_med_group.webApi.Repositories
 
         public void AlterarDescricao(string descricao, int id)
         {
-            Consulta consultaBuscado = BuscarPorId(id);
+            Consultum consultaBuscado = BuscarPorId(id);
             if (descricao != null)
             {
                 consultaBuscado.Descricao = descricao;
-                ctx.Consultas.Update(consultaBuscado);
+                ctx.Consulta.Update(consultaBuscado);
                 ctx.SaveChanges();
             };
         }
 
-        public Consulta BuscarPorId(int id)
+        public Consultum BuscarPorId(int id)
         {
-            return ctx.Consultas.FirstOrDefault(c => c.IdConsulta == id);
+            return ctx.Consulta.FirstOrDefault(c => c.IdConsulta == id);
         }
 
-        public void CadastrarConsulta(Consulta novaConsulta)
+        public void CadastrarConsulta(Consultum novaConsulta)
         {
             novaConsulta.Descricao = "Sem descrição definida";
             novaConsulta.IdSituacao = 1;
-            ctx.Consultas.Add(novaConsulta);
+            ctx.Consulta.Add(novaConsulta);
             ctx.SaveChanges();
         }
 
         public void CancelarConsulta(int Id)
         {
-            Consulta consultaBuscada = BuscarPorId(Id);
+            Consultum consultaBuscada = BuscarPorId(Id);
             consultaBuscada.IdSituacao = 2;
             consultaBuscada.Descricao = "Consulta Cancelada";
-            ctx.Consultas.Update(consultaBuscada);
+            ctx.Consulta.Update(consultaBuscada);
             ctx.SaveChanges();
         }
 
-        public List<Consulta> ListarMinhasConsultas(int id, int idTipoUsuario)
+        public List<Consultum> ListarMinhasConsultas(int id, int idTipoUsuario)
         {
             if (idTipoUsuario == 1)
             {
@@ -54,9 +54,9 @@ namespace senai.sp_med_group.webApi.Repositories
 
                 int idMedico = medico.IdMedico;
 
-                return ctx.Consultas
+                return ctx.Consulta
                                 .Where(c => c.IdMedico == idMedico)
-                                .Select(p => new Consulta()
+                                .Select(p => new Consultum()
                                 {
                                     DataConsulta = p.DataConsulta,
                                     IdConsulta = p.IdConsulta,
@@ -93,9 +93,9 @@ namespace senai.sp_med_group.webApi.Repositories
                 Paciente paciente = ctx.Pacientes.FirstOrDefault(u => u.IdUsuario == id);
 
                 int idPaciente = paciente.IdPaciente;
-                return ctx.Consultas
+                return ctx.Consulta
                                 .Where(c => c.IdConsulta == idPaciente)
-                                .Select(p => new Consulta()
+                                .Select(p => new Consultum()
                                 {
                                     DataConsulta = p.DataConsulta,
                                     IdConsulta = p.IdConsulta,
@@ -132,14 +132,14 @@ namespace senai.sp_med_group.webApi.Repositories
 
         }
 
-        public List<Consulta> ListarTodas()
+        public List<Consultum> ListarTodas()
         {
-            return ctx.Consultas.ToList();
+            return ctx.Consulta.ToList();
         }
 
         public void RemoverConsulta(int id)
         {
-            ctx.Consultas.Remove(BuscarPorId(id));
+            ctx.Consulta.Remove(BuscarPorId(id));
             ctx.SaveChanges();
         }
     }

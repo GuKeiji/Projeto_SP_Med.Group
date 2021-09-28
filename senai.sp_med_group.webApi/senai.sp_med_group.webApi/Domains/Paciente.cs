@@ -9,7 +9,7 @@ namespace senai.sp_med_group.webApi.Domains
     {
         public Paciente()
         {
-            Consulta = new HashSet<Consulta>();
+            Consulta = new HashSet<Consultum>();
         }
 
         public int IdPaciente { get; set; }
@@ -21,6 +21,6 @@ namespace senai.sp_med_group.webApi.Domains
         public string Endereco { get; set; }
 
         public virtual Usuario IdUsuarioNavigation { get; set; }
-        public virtual ICollection<Consulta> Consulta { get; set; }
+        public virtual ICollection<Consultum> Consulta { get; set; }
     }
 }

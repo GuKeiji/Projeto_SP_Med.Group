@@ -34,7 +34,7 @@ namespace senai.sp_med_group.webApi.Controllers
         {
             try
             {
-                List<Consulta> listaConsulta = _consultaRepository.ListarTodas();
+                List<Consultum> listaConsulta = _consultaRepository.ListarTodas();
                 if (listaConsulta == null)
                 {
                     return StatusCode(404, new
@@ -57,7 +57,7 @@ namespace senai.sp_med_group.webApi.Controllers
         /// <returns></returns>
         [Authorize(Roles = "3")]
         [HttpPost]
-        public IActionResult Cadastrar(Consulta novaConsulta)
+        public IActionResult Cadastrar(Consultum novaConsulta)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace senai.sp_med_group.webApi.Controllers
 
                 int id = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
                 int idTipoUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value);
-                List<Consulta> listaConsulta = _consultaRepository.ListarMinhasConsultas(id, idTipoUsuario);
+                List<Consultum> listaConsulta = _consultaRepository.ListarMinhasConsultas(id, idTipoUsuario);
 
                 if (listaConsulta.Count == 0)
                 {
@@ -184,7 +184,7 @@ namespace senai.sp_med_group.webApi.Controllers
         /// <returns></returns>
         [Authorize(Roles = "1")]
         [HttpPatch("AlterarDescricao/{id}")]
-        public IActionResult AlterarDescricao(Consulta consultaAtualizada, int id)
+        public IActionResult AlterarDescricao(Consultum consultaAtualizada, int id)
         {
             try
             {

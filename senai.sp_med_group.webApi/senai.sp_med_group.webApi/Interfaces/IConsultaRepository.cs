@@ -8,12 +8,12 @@ namespace senai.sp_med_group.webApi.Interfaces
 {
     interface IConsultaRepository
     {
-        void CadastrarConsulta(Consulta novaConsulta);
+        void CadastrarConsulta(Consultum novaConsulta);
         void AlterarDescricao(string descricao, int id);
         void RemoverConsulta(int id);
         void CancelarConsulta(int Id);
-        Consulta BuscarPorId(int id);
-        List<Consulta> ListarMinhasConsultas(int id, int idTipoUsuario);
-        List<Consulta> ListarTodas();
+        Consultum BuscarPorId(int id);
+        List<Consultum> ListarMinhasConsultas(int id, int idTipoUsuario);
+        List<Consultum> ListarTodas();
     }
 }

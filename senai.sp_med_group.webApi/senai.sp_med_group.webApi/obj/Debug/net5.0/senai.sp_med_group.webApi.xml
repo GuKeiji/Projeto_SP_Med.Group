@@ -9,7 +9,7 @@
             Lista todas as consultas
             </summary>
         </member>
-        <member name="M:senai.sp_med_group.webApi.Controllers.ConsultasController.Cadastrar(senai.sp_med_group.webApi.Domains.Consulta)">
+        <member name="M:senai.sp_med_group.webApi.Controllers.ConsultasController.Cadastrar(senai.sp_med_group.webApi.Domains.Consultum)">
             <summary>
             Cadastra uma nova consulta
             </summary>
@@ -29,7 +29,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:senai.sp_med_group.webApi.Controllers.ConsultasController.AlterarDescricao(senai.sp_med_group.webApi.Domains.Consulta,System.Int32)">
+        <member name="M:senai.sp_med_group.webApi.Controllers.ConsultasController.AlterarDescricao(senai.sp_med_group.webApi.Domains.Consultum,System.Int32)">
             <summary>
             Altera a descrição de uma consulta
             </summary>

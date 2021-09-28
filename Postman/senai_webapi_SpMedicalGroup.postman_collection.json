@@ -610,6 +610,81 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Usuarios.PostarBD",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVAaG90bWFpbC5jb20iLCJqdGkiOiIxMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjMiLCJleHAiOjE2MzI4NjQ0NzMsImlzcyI6InNlbmFpLnNwX21lZF9ncm91cC53ZWJBcGkiLCJhdWQiOiJzZW5haS5zcF9tZWRfZ3JvdXAud2ViQXBpIn0.8tdTd2-r6fRZErXpeLcsvB_wTZVwEamt8NY5fX2ZaDo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "arquivo",
+									"type": "file",
+									"src": "Capa de sociologia.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Usuarios/imagem/bd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuarios",
+								"imagem",
+								"bd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Usuarios.ConsultarBD",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImplcmVAaG90bWFpbC5jb20iLCJqdGkiOiIxMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjMiLCJleHAiOjE2MzI4NjQ0NzMsImlzcyI6InNlbmFpLnNwX21lZF9ncm91cC53ZWJBcGkiLCJhdWQiOiJzZW5haS5zcF9tZWRfZ3JvdXAud2ViQXBpIn0.8tdTd2-r6fRZErXpeLcsvB_wTZVwEamt8NY5fX2ZaDo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Usuarios/imagem/bd/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Usuarios",
+								"imagem",
+								"bd",
+								"11"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
