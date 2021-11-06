@@ -1,0 +1,88 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* TELA LOGIN */
+
+.tela_login_fundo {
+    display: flex;
+    background-color: #E0E0E0;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.fundo_login {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    width: 886px;
+    height: 575px;
+}
+
+.form_login {
+    /* background-color: brown; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 443px;
+    height: 575px;
+}
+
+.img_login {
+    height: 575px;
+    width: 443px;
+}
+
+.logo_login {
+    width: 97px;
+    height: 101px;
+}
+
+.organizar_inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 110px;
+    /* width: 673.23px; */
+}
+
+.input_login {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    width: 355px;
+    height: 36px;
+}
+
+.input_login::placeholder {
+    color: #AAAAAA;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.organizar_btn {
+    display: flex;
+    width: 355px;
+    justify-content: flex-start;
+}
+
+.btn_login {
+    background-color: #81DF99;
+    color: white;
+    border-radius: 35px;
+    width: 146px;
+    height: 35px;
+    text-transform: uppercase;
+    border-style: none;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+/* FIM TELA LOGIN */
+
+/* TELA  */
