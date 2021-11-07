@@ -3,6 +3,11 @@
     margin: 0;
     box-sizing: border-box;
 }
+/* GRID */
+
+.container {
+    width: 80%;
+}
 
 /* TELA LOGIN */
 
@@ -85,4 +90,155 @@
 
 /* FIM TELA LOGIN */
 
-/* TELA  */
+/* TELA PACIENTE */
+
+.tela_paciente {
+    align-items: center;
+    width: 98vw;
+}
+
+.header_tela_paciente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgb(255, 0, 0); */
+    height: 125px;
+    width: 100%;
+}
+
+.container_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 125px;
+}
+
+.logo_header {
+    width: 54px;
+    height: 58px;
+}
+
+.container_links {
+    display: flex;
+    justify-content: space-between;
+    width: 45%;
+    text-transform: uppercase   ;
+}
+
+.container_links span {
+    font-size: 15px;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #007397;
+}
+
+.container_main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 470px;
+}
+
+.titulo_pagina_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 166px;
+    width: 80%;
+    background-color: #0E88AE;
+}
+
+.titulo_pagina_box h1 {
+    font-size: 44px;
+    font-weight: 400;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #ffffff;
+}
+
+.icone_injecao {
+    width: 100px;
+    height: 100px;
+}
+
+.tabela_consultas{
+    padding: 8px 0;
+    font-weight: lighter;
+    text-align: left;
+    table-layout: fixed;
+    width: 80%;
+    white-space: nowrap;
+    font-size: 12px;
+    background-color: #0E88AE;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+.tabela_consultas th {
+    padding-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.tabela_consultas td {
+    padding-bottom: 25px;
+    font-size: 15px;
+    font-weight: 200;
+}
+
+.footer_tela_paciente{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgb(255, 0, 0); */
+    height: 125px;
+    width: 100%;
+}
+
+.container_footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    /* background-color: tomato; */
+}
+
+.container_footer p {
+    width: 118px;
+    height: 85%;
+}
+
+/*   
+  #tabela-lista td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+  }
+  
+  #tabela-lista td,
+  #tabela-lista th {
+    text-align: left;
+    border: 1px solid #f6f6f6;
+    padding: 8px;
+  }
+  
+  #tabela-lista tr:nth-child(even) {
+    background-color: #fff;
+  }
+  
+  #tabela-lista tr:hover {
+    background-color: #ddd;
+  }
+  
+  #tabela-lista th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #6f47ff;
+    color: white;
+  }
+   */
+/* FIM TELA PACIENTE */
