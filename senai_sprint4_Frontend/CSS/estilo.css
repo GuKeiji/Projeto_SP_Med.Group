@@ -94,14 +94,16 @@
 
 .tela_paciente {
     align-items: center;
-    width: 98vw;
+    width: 100vw;
+    background-color: #f8f8f8;
+    overflow-x: hidden; 
 }
 
 .header_tela_paciente {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: rgb(255, 0, 0); */
+    background-color: white;
     height: 125px;
     width: 100%;
 }
@@ -139,6 +141,7 @@
     align-items: center;
     justify-content: space-evenly;
     height: 470px;
+    margin-bottom: 200px;
 }
 
 .titulo_pagina_box {
@@ -176,13 +179,13 @@
 }
 
 .tabela_consultas th {
-    padding-bottom: 10px;
+    padding: 0 0 10px 10px;
     font-size: 16px;
     font-weight: 500;
 }
 
 .tabela_consultas td {
-    padding-bottom: 25px;
+    padding: 0 0 25px 10px;
     font-size: 15px;
     font-weight: 200;
 }
@@ -191,7 +194,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: rgb(255, 0, 0); */
+    background-color: white;
     height: 125px;
     width: 100%;
 }
@@ -208,6 +211,15 @@
 .container_footer p {
     width: 118px;
     height: 85%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #007397;
+    font-size: 14.3px;
+}
+
+.lista_footer {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14.3px;
+    color: #007397;
 }
 
 /*   
