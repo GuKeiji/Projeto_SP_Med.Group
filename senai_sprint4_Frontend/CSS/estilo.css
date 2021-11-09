@@ -140,7 +140,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    height: 562px;
+    height: 1140px;
     margin-bottom: 200px;
 }
 
@@ -195,6 +195,91 @@
     cursor: pointer;
     border-color: #0E88AE;
     border-style: hidden;
+}
+
+.cadastrar_consulta_box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 699px;
+    width: 80%;
+    background-color: #0E88AE;
+}
+
+.cadastrar_consulta_box h2 {
+    color: white;
+    font-size: 57px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+.organizar_form{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    height: 350px;
+}
+
+.form_cadastrar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* .titulo_select{
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+} */
+
+.input_select{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom-color: white;
+    background-color: #0e88ae;
+    width: 355px;
+    height: 36px;
+    color: white;
+}
+
+.input_cadastrar{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom-color: white;
+    background-color: #0e88ae;
+    width: 355px;
+    height: 36px;
+}
+
+.input_cadastrar::placeholder{
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.input_cadastrar_data{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom-color: white;
+    background-color: #0e88ae;
+    width: 355px;
+    height: 36px;
+    color: white;
+       
+}
+
+.input_cadastrar_data::-webkit-calendar-picker-indicator{
+    color: white;
+}
+
+.img_form{
+    width: 42%;
+    height: 93%;
 }
 
 .footer_tela_paciente{
