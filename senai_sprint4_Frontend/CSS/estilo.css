@@ -64,6 +64,13 @@
     height: 36px;
 }
 
+.input_login:focus, input:focus, select:focus {
+    box-shadow: 0;
+    /* border: 0 none; */
+    outline: 0;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
 .input_login::placeholder {
     color: #AAAAAA;
     font-size: 24px;
@@ -255,6 +262,13 @@
     height: 36px;
 }
 
+.input_cadastrar:focus, input:focus, select:focus {
+    box-shadow: 0;
+    /* border: 0 none; */
+    outline: 0;
+    border-bottom: 1px solid white;
+}
+
 .input_cadastrar::placeholder{
     color: #ffffff;
     font-size: 12px;
@@ -274,7 +288,29 @@
 }
 
 .input_cadastrar_data::-webkit-calendar-picker-indicator{
+    background: #0e88ae;
+    height: 100%;
+    background-image: url(../Assets/calendar.png);
+    /* background: no-repeat; */
+    width: 10px;
+    height: 12px;
+}
+
+.btn_enviar {
+    background-color: #81DF99;
     color: white;
+    border-radius: 35px;
+    width: 146px;
+    height: 35px;
+    text-transform: uppercase;
+    border-style: none;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.organizar_btn_cadastrar{
+    width: 100%;
+    height: 36px;
 }
 
 .img_form{
@@ -347,3 +383,65 @@
   }
    */
 /* FIM TELA PACIENTE */
+
+/*INPUT DATA*/
+/* body {
+    font-size:16px;
+
+    background:#0e88ae;
+  }
+  
+  input[type="datetime"] {
+    display:block;
+    position:relative;
+    height: 36px;
+    color: white;
+    width: 100%;
+    padding:1rem 3.5rem 1rem 0.75rem;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom-color: white;    font-size:1rem;
+    font-family:monospace;
+    background:
+    #0e88ae
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='22' viewBox='0 0 20 22'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23688EBB' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' transform='translate(1 1)'%3E%3Crect width='18' height='18' y='2' rx='2'/%3E%3Cpath d='M13 0L13 4M5 0L5 4M0 8L18 8'/%3E%3C/g%3E%3C/svg%3E")
+      right 1rem
+      center
+      no-repeat;
+    
+    cursor:pointer;
+  }
+  
+  ::-webkit-datetime-edit {}
+  ::-webkit-datetime-edit-fields-wrapper {}
+  ::-webkit-datetime-edit-month-field:hover,
+  ::-webkit-datetime-edit-day-field:hover,
+  ::-webkit-datetime-edit-year-field:hover {
+    background:rgba(0, 120, 250, 0.1);
+  }
+  ::-webkit-datetime-edit-text {
+    opacity:0;
+  }
+  ::-webkit-clear-button,
+  ::-webkit-inner-spin-button {
+    display:none;
+  }
+  ::-webkit-calendar-picker-indicator {
+    position:absolute;
+    width:2.5rem;
+    height:100%;
+    top:0;
+    right:0;
+    bottom:0;
+    
+    opacity:0;
+    cursor:pointer;
+    
+    color:rgba(0, 120, 250, 1);
+    background:rgba(0, 120, 250, 1);
+   
+  }
+  
+  input[type="date"]:hover::-webkit-calendar-picker-indicator { opacity:0.05; }
+  input[type="date"]:hover::-webkit-calendar-picker-indicator:hover { opacity:0.15; } */
