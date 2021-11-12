@@ -7,15 +7,15 @@ import {
 // import { Link } from 'react-router-dom';
 
 import logo from '../../Assets/logo.png';
-import foto from '../../Assets/img_login_gradient.png'
+import foto from '../../Assets/img_login_gradient.png';
 import '../../CSS/estilo.css';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'jere@hotmail.com',
-      senha: 'jere5236',
+      email: '',
+      senha: '',
       erroMensagem: '',
       isLoading: false,
     };
