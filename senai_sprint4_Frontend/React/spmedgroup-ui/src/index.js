@@ -8,9 +8,9 @@ import {
 } from 'react-router-dom';
 import { parseJwt, usuarioAutenticado } from './services/auth';
 
-import './index.css';
-import Login from './pages/login/App'
+import './CSS/estilo.css';
 import reportWebVitals from './reportWebVitals';
+import Login from './pages/login/App'
 
 const PermissaoAdm = ({ component: Component }) => (
   <Route
@@ -55,12 +55,7 @@ const routing = (
   <Router>
     <div>
       <Switch>
-        <Route path="/login" component={Login} /> {/* Login */}
-        {/* <PermissaoMedico path="/medico" component={Medico} />
-        <PermissaoAdm path="/Adm" component={Adm} />
-        <PermissaoPaciente path="/paciente" component={Paciente} />
-        <Route path="/notFound" component={NotFound} />
-        <Redirect to="/notFound" /> */}
+        <Route path="/login" component = {Login} /> {/* Login */}
       </Switch>
     </div>
   </Router>

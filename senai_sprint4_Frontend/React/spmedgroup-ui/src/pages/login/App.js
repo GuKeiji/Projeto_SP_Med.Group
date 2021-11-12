@@ -3,9 +3,9 @@ import axios from 'axios';
 import { parseJwt, usuarioAutenticado } from '../../services/auth';
 import { Link } from 'react-router-dom';
 
-import logo from '../../../../../Assets/logo.png';
+import logo from '../../Assets/logo.png';
 
-import '../../../../../CSS/estilo.css';
+import '../../CSS/estilo.css';
 
 export default class Login extends Component {
   constructor(props) {
