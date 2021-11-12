@@ -7691,11 +7691,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\52826143832\\Downloads\\projetosp\\Projeto_SP_Med.Group\\senai_sprint2_Backend\\API\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi.csproj",
+      "projectUniqueName": "C:\\Users\\52826143832\\Downloads\\Nova pasta\\Projeto_SP_Med.Group\\senai_sprint2_Backend\\API\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi.csproj",
       "projectName": "senai.sp_med_group.webApi",
-      "projectPath": "C:\\Users\\52826143832\\Downloads\\projetosp\\Projeto_SP_Med.Group\\senai_sprint2_Backend\\API\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi.csproj",
+      "projectPath": "C:\\Users\\52826143832\\Downloads\\Nova pasta\\Projeto_SP_Med.Group\\senai_sprint2_Backend\\API\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi.csproj",
       "packagesPath": "C:\\Users\\52826143832\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\52826143832\\Downloads\\projetosp\\Projeto_SP_Med.Group\\senai_sprint2_Backend\\API\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi\\obj\\",
+      "outputPath": "C:\\Users\\52826143832\\Downloads\\Nova pasta\\Projeto_SP_Med.Group\\senai_sprint2_Backend\\API\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\52826143832\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7777,7 +7777,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MHH8qHDM7Kc/iND9IKWO0O4oWpukYaKyA48Ahz2tzccph4VgIQqyGZnk7j9m7UZM1EpEESkpCX7CE0ItlJmmhQ==",
+  "dgSpecHash": "yFhxLb94XenIG56dfgdwig+ZA2SfoawNUYtt92GYCvf2P+5a3VvvElkX8SDomGBSiWYDHFrkCBWmboO1RG0apg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\52826143832\\Downloads\\projetosp\\Projeto_SP_Med.Group\\senai_sprint2_Backend\\API\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi.csproj",
+  "projectFilePath": "C:\\Users\\52826143832\\Downloads\\Nova pasta\\Projeto_SP_Med.Group\\senai_sprint2_Backend\\API\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi\\senai.sp_med_group.webApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\52826143832\\.nuget\\packages\\google.apis\\1.55.0\\google.apis.1.55.0.nupkg.sha512",
     "C:\\Users\\52826143832\\.nuget\\packages\\google.apis.admin.directory.directory_v1\\1.55.0.2454\\google.apis.admin.directory.directory_v1.1.55.0.2454.nupkg.sha512",
