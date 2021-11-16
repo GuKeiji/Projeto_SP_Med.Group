@@ -41,10 +41,9 @@ export default class Login extends Component {
             this.props.history.push('/medico')
           } else if (parseJwt().role === '2') {
             this.props.history.push('/paciente')
-          } else {
-            this.props.history.push('/administrador')
+          } else if (parseJwt().role === '3') {
+            this.props.history.push('/adm')
           }
-
         }
       })
 

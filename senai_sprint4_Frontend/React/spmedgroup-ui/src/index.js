@@ -41,18 +41,18 @@ import Adm from './pages/adm/administradort'
 //   />
 // )
 
-const PermissaoPaciente = ({ component: Component }) => (
-  <Route
-    render={(props) =>
-      usuarioAutenticado() && parseJwt().role === '2' ? (
-        // operador spread
-        <Component {...props} />
-      ) : (
-        <Redirect to="login" />
-      )
-    }
-  />
-)
+// const PermissaoPaciente = ({ component: Component }) => (
+//   <Route
+//     render={(props) =>
+//       usuarioAutenticado() && parseJwt().role === '2' ? (
+//         // operador spread
+//         <Component {...props} />
+//       ) : (
+//         <Redirect to="login" />
+//       )
+//     }
+//   />
+// )
 
 const routing = (
   <Router>

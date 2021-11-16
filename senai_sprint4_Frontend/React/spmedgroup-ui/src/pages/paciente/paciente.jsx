@@ -15,7 +15,7 @@ export default function Paciente() {
         })
             .then(resposta => {
                 if (resposta.status === 200) {
-                    setListaMinhasConsultas(resposta.data)
+                    setListaMinhasConsultas(resposta.data.listaConsulta)
                 }
             })
             .catch(erro => console.log(erro))
@@ -57,14 +57,14 @@ export default function Paciente() {
                                 listaMinhasConsultas.map((consulta) => {
                                     return (
 
-                                        <tr key={consulta.IdConsulta}>
-                                            <td>{consulta.IdMedicoNavigation.IdUsuarioNavigation.nome}</td>
-                                            <td>{consulta.IdSituacaoNavigation.descricao}</td>
+                                        <tr key={consulta.idConsulta}>
+                                            <td>{consulta.idMedicoNavigation.idUsuarioNavigation.nome}</td>
+                                            <td>{consulta.idSituacaoNavigation.descricao}</td>
                                             <td>{ Intl.DateTimeFormat("pt-BR", {
                                                     year: 'numeric', month: 'numeric', day: 'numeric',
                                                     hour: 'numeric', minute: 'numeric', hour12: true
-                                                }).format(new Date(consulta.DaraConsulta)) }</td>
-                                            <td>{consulta.Descricao}</td>
+                                                }).format(new Date(consulta.dataConsulta)) }</td>
+                                            <td>{consulta.descricao}</td>
                                         </tr>
                                     )
                                 })

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import '../../CSS/estilo.css';
 
-export default function ConsultaAdm() {
+export default function Adm() {
     const [listaConsulta, setListaConsulta] = useState([]);
     const [listaMedico, setListaMedico] = useState([]);
     const [listaPaciente, setListaPaciente] = useState([]);
@@ -11,63 +11,63 @@ export default function ConsultaAdm() {
     const [idMedico, setIdMedico] = useState('');
     const [dataConsulta, setDataConsulta] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    
+
     function listarConsultas() {
-        axios('http://localhost:5000/api/Consultas/', {
+        axios('http://localhost:5000/api/Consultas', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
             }
         })
-        .then(resposta => {
-            if (resposta.status === 200) {
-                setListaConsulta(resposta.data)
-            }
-        })
-        
-        .catch(erro => console.log(erro))
+            .then(resposta => {
+                if (resposta.status === 200) {
+                    setListaConsulta(resposta.data.listaConsulta)
+                }
+            })
+
+            .catch(erro => console.log(erro))
     };
-    
+
     useEffect(listarConsultas, []);
-    
+
     function listarMedicos() {
         axios('http://localhost:5000/api/Medicos', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
             }
         })
-        .then(resposta => {
-            if (resposta.status === 200) {
-                setListaMedico(resposta.data)
-            }
-        })
-        
-        .catch(erro => console.log(erro))
+            .then(resposta => {
+                if (resposta.status === 200) {
+                    setListaMedico(resposta.data.listaMedico)
+                }
+            })
+
+            .catch(erro => console.log(erro))
     }
-    
+
     useEffect(listarMedicos, []);
-    
+
     function listarPacientes() {
         axios('http://localhost:5000/api/Pacientes', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
             }
         })
-        .then(resposta => {
-            if (resposta.status === 200) {
-                setListaPaciente(resposta.data)
-            }
-        })
-        
-        .catch(erro => console.log(erro))
+            .then(resposta => {
+                if (resposta.status === 200) {
+                    setListaPaciente(resposta.data.listaPaciente)
+                }
+            })
+
+            .catch(erro => console.log(erro))
     }
-    
+
     useEffect(listarPacientes, []);
-    
+
     function cadastrarConsulta(evento) {
         setIsLoading(true);
-        
+
         evento.preventDefault()
-        
+
         axios.post('http://localhost:5000/api/Consultas', {
             idPaciente: idPaciente,
             idMedico: idMedico,
@@ -77,22 +77,25 @@ export default function ConsultaAdm() {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
             }
         })
-        .then(resposta => {
-            if (resposta.status === 201) {
-                console.log('Consulta cadastrada');
-                setIdMedico('');
-                setIdPaciente('');
-                setDataConsulta('');
-                listarConsultas();
-                setIsLoading(false);
-            }
-        })
-        .catch(erro => console.log(erro), setIdMedico(''), setIdPaciente(''), setDataConsulta(''), setInterval(() => {
-            setIsLoading(false)
-        }, 5000));
-        
-        return (
-            <div class="tela_paciente">
+            .then(resposta => {
+                if (resposta.status === 201) {
+                    console.log('Consulta cadastrada');
+                    setIdMedico('');
+                    setIdPaciente('');
+                    setDataConsulta('');
+                    listarConsultas();
+                    setIsLoading(false);
+                }
+            })
+            .catch(erro => console.log(erro), console.log(listaConsulta), setIdMedico(''), setIdPaciente(''), setDataConsulta(''), setInterval(() => {
+                setIsLoading(false)
+            }, 5000));
+
+       
+    }
+
+    return (
+        <div class="tela_paciente">
             <header class="header_tela_paciente">
                 <div class="container_header">
                     <img class="logo_header" src="../Assets/logo.png" alt="logo"></img>
@@ -125,9 +128,9 @@ export default function ConsultaAdm() {
                                 <tr key={consulta.idConsulta}>
                                     <td>{consulta.idMedicoNavigation.idUsuarioNavigation.nome}</td>
                                     <td>{consulta.idPacienteNavigation.idUsuarioNavigation.nome}</td>
-                                    <td>{consulta.descricao}</td>
                                     <td>{consulta.idSituacaoNavigation.descricao}</td>
                                     <td>{consulta.dataConsulta}</td>
+                                    <td>{consulta.descricao}</td>
                                 </tr>
                             )
                         })}
@@ -142,12 +145,12 @@ export default function ConsultaAdm() {
                                 id="medico"
                                 value={idMedico}
                                 onChange={(campo) => setIdMedico(campo.target.value)} class="input_select" placeholder="Nome Médico"
-                                >
+                            >
 
                                 <option class="titulo_select" value="0">Nome Médico</option>
 
                                 {listaMedico.map((medico) => {
-                                    return (
+                                    return ( 
                                         <option key={medico.idMedico} value={medico.idMedico}>
                                             {medico.idUsuarioNavigation.nome}
                                         </option>
@@ -165,15 +168,17 @@ export default function ConsultaAdm() {
 
                                 {listaPaciente.map((paciente) => {
                                     return (
+                      
                                         <option key={paciente.idPaciente} value={paciente.idPaciente}>
                                             {paciente.idUsuarioNavigation.nome}
                                         </option>
                                     )
-                                })}
+                                })
+                                }
 
                             </select>
-                            {/* <input class="input_cadastrar" placeholder="Descrição" type="text"></input> */}
-                            <input name="data" class="input_cadastrar_data" value={dataConsulta} onChange = {(campo) => setDataConsulta(campo.target.value)} type="datetime-local"></input>
+                            <input class="input_cadastrar" placeholder="Descrição" type="text"></input>
+                            <input name="data" class="input_cadastrar_data" value={dataConsulta} onChange={(campo) => setDataConsulta(campo.target.value)} type="datetime-local"></input>
                             <div class="organizar_btn_cadastrar">
                                 <button class="btn_enviar">Cadastrar</button>
                             </div>
@@ -199,5 +204,4 @@ export default function ConsultaAdm() {
             </footer>
         </div>
     )
-}
 }

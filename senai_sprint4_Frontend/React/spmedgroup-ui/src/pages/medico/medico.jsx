@@ -5,7 +5,7 @@ import logo from '../../Assets/logo.png';
 import seringa from '../../Assets/seringa.png';
 import icon_edit from '../../Assets/icon_edit.png'
 
-export default function Paciente() {
+export default function Medico() {
     const [listaMinhasConsultas, setListaMinhasConsultas] = useState([]);
     const [idConsulta, setIdConsulta] = useState('');
     const [descricao, setDescricao] = useState('');
@@ -19,7 +19,7 @@ export default function Paciente() {
         })
             .then(resposta => {
                 if (resposta.status === 200) {
-                    setListaMinhasConsultas(resposta.data)
+                    setListaMinhasConsultas(resposta.data.listaConsulta)
                 }
             })
             .catch(erro => console.log(erro))
@@ -27,14 +27,14 @@ export default function Paciente() {
 
     useEffect(buscarMinhasConsultas, [])
 
-    alterarDescricao = (event) => {
+    function alterarDescricao(event){
 
         setIsLoading(true);
 
         event.preventDefault();
 
         axios.patch("http://localhost:5000/api/Consultas/AlterarDescricao" + idConsulta, {
-
+            descricao: descricao
         }, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
@@ -44,7 +44,7 @@ export default function Paciente() {
             if (resposta.status === 201) {
                 console.log('Descrição alterada');
 
-                listarConsultas();
+                buscarMinhasConsultas();
                 setIsLoading(false);
             }
         })
@@ -90,12 +90,12 @@ export default function Paciente() {
                                         <tr key={consulta.idConsulta}>
                                             <td>{consulta.idPacienteNavigation.idUsuarioNavigation.nome}</td>
                                             <td>{consulta.idSituacaoNavigation.descricao}</td>
-                                            <td>{ Intl.DateTimeFormat("pt-BR", {
+                                            <td>{Intl.DateTimeFormat("pt-BR", {
                                                     year: 'numeric', month: 'numeric', day: 'numeric',
-                                                    hour: 'numeric', minute: 'numeric', hour12: true
-                                                }).format(new Date(consulta.DataConsulta)) }</td>
-                                            <td>{consulta.Descricao}</td>
-                                            <td><button onClick={alterarDescricao} type='submit' className="btn_edit"><img src={icon_edit} alt="Icone de edição"/></button></td>
+                                                    hour: 'numeric', minute: 'numeric', hour12: false
+                                                }).format(new Date(consulta.dataConsulta))}</td>
+                                            <td>{consulta.descricao}</td>
+                                            <td><button className="btn_edit" ><img src={icon_edit} alt="Icone de editar" /></button></td>
                                         </tr>
                                     )
                                 })
