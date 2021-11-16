@@ -36,7 +36,7 @@ export default class Login extends Component {
           let base64 = localStorage.getItem('usuario-login').split('.')[1];
           console.log(base64);
           console.log(this.props);
-
+          console.log(parseJwt().role)
           if (parseJwt().role === '1') {
             this.props.history.push('/medico')
           } else if (parseJwt().role === '2') {

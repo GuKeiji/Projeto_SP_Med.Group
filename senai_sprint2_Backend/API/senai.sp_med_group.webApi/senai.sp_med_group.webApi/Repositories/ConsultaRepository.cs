@@ -60,6 +60,7 @@ namespace senai.sp_med_group.webApi.Repositories
                                 {
                                     DataConsulta = p.DataConsulta,
                                     IdConsulta = p.IdConsulta,
+                                    Descricao = p.Descricao,
                                     IdMedicoNavigation = new Medico()
                                     {
                                         Crm = p.IdMedicoNavigation.Crm,
@@ -99,6 +100,7 @@ namespace senai.sp_med_group.webApi.Repositories
                                 {
                                     DataConsulta = p.DataConsulta,
                                     IdConsulta = p.IdConsulta,
+                                    Descricao = p.Descricao,
                                     IdMedicoNavigation = new Medico()
                                     {
                                         Crm = p.IdMedicoNavigation.Crm,

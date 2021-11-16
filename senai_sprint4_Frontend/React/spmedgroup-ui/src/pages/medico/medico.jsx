@@ -3,9 +3,13 @@ import axios from 'axios';
 import '../../CSS/estilo.css';
 import logo from '../../Assets/logo.png';
 import seringa from '../../Assets/seringa.png';
+import icon_edit from '../../Assets/icon_edit.png'
 
 export default function Paciente() {
     const [listaMinhasConsultas, setListaMinhasConsultas] = useState([]);
+    const [idConsulta, setIdConsulta] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     function buscarMinhasConsultas() {
         axios('http://localhost:5000/api/Consultas/Lista/Minhas', {
@@ -22,6 +26,32 @@ export default function Paciente() {
     };
 
     useEffect(buscarMinhasConsultas, [])
+
+    alterarDescricao = (event) => {
+
+        setIsLoading(true);
+
+        event.preventDefault();
+
+        axios.patch("http://localhost:5000/api/Consultas/AlterarDescricao" + idConsulta, {
+
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
+            }
+        })
+        .then(resposta => {
+            if (resposta.status === 201) {
+                console.log('Descrição alterada');
+
+                listarConsultas();
+                setIsLoading(false);
+            }
+        })
+        .catch(erro => console.log(erro), setInterval(() => {
+            setIsLoading(false)
+        }, 5000));
+    }
 
     return (
         <div>
@@ -45,7 +75,7 @@ export default function Paciente() {
                     <table class="tabela_consultas">
                         <thead class="tabela_consultas_thead">
                             <tr>
-                                <th>Médico</th>
+                                <th>Paciente</th>
                                 <th>Situação</th>
                                 <th>Data a Consulta</th>
                                 <th>Descrição</th>
@@ -57,14 +87,15 @@ export default function Paciente() {
                                 listaMinhasConsultas.map((consulta) => {
                                     return (
 
-                                        <tr key={consulta.IdConsulta}>
-                                            <td>{consulta.IdMedicoNavigation.IdUsuarioNavigation.nome}</td>
-                                            <td>{consulta.IdSituacaoNavigation.descricao}</td>
+                                        <tr key={consulta.idConsulta}>
+                                            <td>{consulta.idPacienteNavigation.idUsuarioNavigation.nome}</td>
+                                            <td>{consulta.idSituacaoNavigation.descricao}</td>
                                             <td>{ Intl.DateTimeFormat("pt-BR", {
                                                     year: 'numeric', month: 'numeric', day: 'numeric',
                                                     hour: 'numeric', minute: 'numeric', hour12: true
-                                                }).format(new Date(consulta.DaraConsulta)) }</td>
+                                                }).format(new Date(consulta.DataConsulta)) }</td>
                                             <td>{consulta.Descricao}</td>
+                                            <td><button onClick={alterarDescricao} type='submit' className="btn_edit"><img src={icon_edit} alt="Icone de edição"/></button></td>
                                         </tr>
                                     )
                                 })

@@ -3,19 +3,22 @@ import ReactDOM from 'react-dom';
 import {
   Route,
   BrowserRouter as Router,
-  // Redirect,
+  Redirect,
   Switch,
 } from 'react-router-dom';
-// import { parseJwt, usuarioAutenticado } from './services/auth';
+import { parseJwt, usuarioAutenticado } from './services/auth';
 
 import './CSS/estilo.css';
 import reportWebVitals from './reportWebVitals';
 import Login from './pages/login/App'
+import Paciente from './pages/paciente/paciente'
+import Medico from './pages/medico/medico'
+import Adm from './pages/adm/administradort'
 
 // const PermissaoAdm = ({ component: Component }) => (
 //   <Route
 //     render={(props) =>
-//       usuarioAutenticado() && parseJwt().role === '3' ? (
+//       usuarioAutenticado() && parseJwt().role === '3' ? ( 
 //         // operador spread
 //         <Component {...props} />
 //       ) : (
@@ -38,24 +41,27 @@ import Login from './pages/login/App'
 //   />
 // )
 
-// const PermissaoPaciente = ({ component: Component }) => (
-//   <Route
-//     render={(props) =>
-//       usuarioAutenticado() && parseJwt().role === '2' ? (
-//         // operador spread
-//         <Component {...props} />
-//       ) : (
-//         <Redirect to="login" />
-//       )
-//     }
-//   />
-// )
+const PermissaoPaciente = ({ component: Component }) => (
+  <Route
+    render={(props) =>
+      usuarioAutenticado() && parseJwt().role === '2' ? (
+        // operador spread
+        <Component {...props} />
+      ) : (
+        <Redirect to="login" />
+      )
+    }
+  />
+)
 
 const routing = (
   <Router>
     <div>
       <Switch>
         <Route exact path="/" component = {Login} /> {/* Login */}
+        <Route path = "/paciente" component = {Paciente}/>
+        <Route path = "/medico" component = {Medico}/>
+        <Route path = "/adm" component = {Adm}/>
       </Switch>
     </div>
   </Router>
