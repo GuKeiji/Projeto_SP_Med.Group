@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "axios";
+
 
 import '../../CSS/estilo.css';
 
-export default function Adm() {
-    const [listaConsulta, setListaConsulta] = useState([]);
-    const [listaMedico, setListaMedico] = useState([]);
-    const [listaPaciente, setListaPaciente] = useState([]);
+export default function ConsultaAdm() {
+    const [listaConsul, setListaConsul] = useState([]);
+    const [listaMed, setListaMed] = useState([]);
+    const [listaPac, setListaPac] = useState([]);
     const [idPaciente, setIdPaciente] = useState('');
     const [idMedico, setIdMedico] = useState('');
-    const [dataConsulta, setDataConsulta] = useState('');
+    const [dataConsul, setDataConsul] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     function listarConsultas() {
@@ -20,7 +21,7 @@ export default function Adm() {
         })
             .then(resposta => {
                 if (resposta.status === 200) {
-                    setListaConsulta(resposta.data.listaConsulta)
+                    setListaConsul(resposta.data)
                 }
             })
 
@@ -37,7 +38,7 @@ export default function Adm() {
         })
             .then(resposta => {
                 if (resposta.status === 200) {
-                    setListaMedico(resposta.data.listaMedico)
+                    setListaMed(resposta.data)
                 }
             })
 
@@ -54,7 +55,8 @@ export default function Adm() {
         })
             .then(resposta => {
                 if (resposta.status === 200) {
-                    setListaPaciente(resposta.data.listaPaciente)
+                    setListaPac(resposta.data.lista)
+                    console.log(listaPac)
                 }
             })
 
@@ -68,140 +70,133 @@ export default function Adm() {
 
         evento.preventDefault()
 
-        axios.post('http://localhost:5000/api/Consultas', {
-            idPaciente: idPaciente,
-            idMedico: idMedico,
-            dataConsulta: dataConsulta
-        }, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
-            }
-        })
+        axios
+            .post('http://localhost:5000/api/Consultas', {
+                idPaciente: idPaciente,
+                idMedico: idMedico,
+                dataConsul: dataConsul
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
+                }
+            })
             .then(resposta => {
                 if (resposta.status === 201) {
                     console.log('Consulta cadastrada');
                     setIdMedico('');
                     setIdPaciente('');
-                    setDataConsulta('');
+                    setDataConsul('');
                     listarConsultas();
                     setIsLoading(false);
                 }
             })
-            .catch(erro => console.log(erro), console.log(listaConsulta), setIdMedico(''), setIdPaciente(''), setDataConsulta(''), setInterval(() => {
+            .catch(erro => console.log(erro), setIdMedico(''), setIdPaciente(''), setDataConsul(''), setInterval(() => {
                 setIsLoading(false)
             }, 5000));
-
-       
     }
 
     return (
-        <div class="tela_paciente">
-            <header class="header_tela_paciente">
-                <div class="container_header">
-                    <img class="logo_header" src="../Assets/logo.png" alt="logo"></img>
-                    <div class="container_links">
-                        <span>Home</span>
-                        <span>Consultas</span>
-                        <span>Sign-up</span>
-                        <span>Sair</span>
+        <div>
+            <main className="container">
+                <div className="background_cadastrar">
+                    <div className="grid alinhar_box">
+                        <section className="container_form">
+                            <form onSubmit={cadastrarConsulta} className="alinhar_form">
+                                <h1>Cadastrar Consultas</h1>
+                                <div className="container_input espacamento">
+                                    <label htmlFor="paciente">Paciente</label>
+                                    <select
+                                        name="paciente"
+                                        id="paciente"
+                                        value={idPaciente}
+                                        onChange={(campo) => setIdPaciente(campo.target.value)}
+                                    >
+                                        <option value="0">Selecione o Paciente</option>
+
+                                        {listaPac.map((paciente) => {
+                                            return (
+                                                <option key={paciente.idPaciente} value={paciente.idPaciente}>
+                                                    {paciente.idUsuarioNavigation.nome}
+                                                </option>
+                                            )
+                                        })}
+
+                                    </select>
+                                </div>
+                                <div className="container_input">
+                                    <label htmlFor="medico">Médico</label>
+                                    <select
+                                        name="medico"
+                                        id="medico"
+                                        value={idMedico}
+                                        onChange={(campo) => setIdMedico(campo.target.value)}
+                                    >
+                                        <option value="0">Selecione o Médico</option>
+
+                                        {listaMed.map((medico) => {
+                                            return (
+                                                <option key={medico.idMedico} value={medico.idMedico}>
+                                                    {medico.idUsuarioNavigation.nome}
+                                                </option>
+                                            )
+                                        })}
+                                    </select>
+                                </div>
+                                <div className="container_input">
+                                    <label htmlFor="data">Data</label>
+                                    <input
+                                        type="datetime-local"
+                                        name="data"
+                                        value={dataConsul}
+                                        onChange = {(campo) => setDataConsul(campo.target.value)}
+                                    />
+                                </div>
+                                {isLoading && (
+                                    <button disabled className='btn' type = 'submit'>
+                                        Carregando...
+                                    </button>
+                                )}
+                                {!isLoading &&(
+                                    <button className='btn' type='submit'>
+                                        Cadastrar
+                                    </button>
+                                )}
+                            </form>
+                        </section>
                     </div>
                 </div>
-            </header>
-            <main class="container_main">
-                <div class="titulo_pagina_box container">
-                    <h1>Minhas Consultas</h1>
-                    <img class="icone_injecao" src="../Assets/seringa.png" alt="Icone de uma seringa de injeção"></img>
-                </div>
-                <table class="tabela_consultas">
-                    <thead class="tabela_consultas_thead">
-                        <tr>
-                            <th>Médico</th>
-                            <th>Paciente</th>
-                            <th>Situação</th>
-                            <th>Data a Consulta</th>
-                            <th>Descrição</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listaConsulta.map((consulta) => {
-                            return (
-                                <tr key={consulta.idConsulta}>
-                                    <td>{consulta.idMedicoNavigation.idUsuarioNavigation.nome}</td>
-                                    <td>{consulta.idPacienteNavigation.idUsuarioNavigation.nome}</td>
-                                    <td>{consulta.idSituacaoNavigation.descricao}</td>
-                                    <td>{consulta.dataConsulta}</td>
-                                    <td>{consulta.descricao}</td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-                <div class="cadastrar_consulta_box">
-                    <h2>Nova Consulta</h2>
-                    <div class="organizar_form">
-                        <form class="form_cadastrar">
-                            <select
-                                name="medico"
-                                id="medico"
-                                value={idMedico}
-                                onChange={(campo) => setIdMedico(campo.target.value)} class="input_select" placeholder="Nome Médico"
-                            >
-
-                                <option class="titulo_select" value="0">Nome Médico</option>
-
-                                {listaMedico.map((medico) => {
-                                    return ( 
-                                        <option key={medico.idMedico} value={medico.idMedico}>
-                                            {medico.idUsuarioNavigation.nome}
-                                        </option>
-                                    )
-                                })}
-
-                            </select>
-                            <select
-                                name="paciente"
-                                id="paciente"
-                                value={idPaciente}
-                                onChange={(campo) => setIdPaciente(campo.target.value)} class="input_select" placeholder="Nome Paciente">
-
-                                <option class="titulo_select" value="0">Nome Paciente</option>
-
-                                {listaPaciente.map((paciente) => {
-                                    return (
-                      
-                                        <option key={paciente.idPaciente} value={paciente.idPaciente}>
-                                            {paciente.idUsuarioNavigation.nome}
-                                        </option>
-                                    )
-                                })
-                                }
-
-                            </select>
-                            <input class="input_cadastrar" placeholder="Descrição" type="text"></input>
-                            <input name="data" class="input_cadastrar_data" value={dataConsulta} onChange={(campo) => setDataConsulta(campo.target.value)} type="datetime-local"></input>
-                            <div class="organizar_btn_cadastrar">
-                                <button class="btn_enviar">Cadastrar</button>
-                            </div>
-                        </form>
-                        <img class="img_form" src="../Assets/img_form.png" alt="Imagem de um Médico"></img>
+                <div className="background_consulta">
+                    <div className="grid alinhar_consulta">
+                        <section className="container_tabela">
+                            <h2>Consultas Agendadas</h2>
+                            <table className="tabela">
+                                <thead>
+                                    <tr>
+                                        <th>Médico</th>
+                                        <th>Paciente</th>
+                                        <th>Descrição</th>
+                                        <th>Status</th>
+                                        <th>Data</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {listaConsul.map((consulta) => {
+                                        return(
+                                            <tr key={consulta.idConsulta}>
+                                                <td>{consulta.idMedicoNavigation.idUsuarioNavigation.nome}</td>
+                                                <td>{consulta.idPacienteNavigation.idUsuarioNavigation.nome}</td>
+                                                <td>{consulta.descricao}</td>
+                                                <td>{consulta.idSituacaoNavigation.descricao}</td>
+                                                <td>{consulta.dataConsul}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </section>
                     </div>
                 </div>
             </main>
-            <footer class="footer_tela_paciente">
-
-                <div class="container_footer">
-                    <ul class="lista_footer">
-                        <li>Serviços</li>
-                        <li>Consultas</li>
-                        <li>Exames</li>
-                        <li>Check-ups</li>
-                        <li>Vacinas</li>
-                        <li>Cirurgias</li>
-                    </ul>
-                    <img class="logo_header" src="../Assets/logo.png" alt="logo"></img>
-                    <p>Salvar vidas e cuidar das pessoas porque elas não podem esperar nas filas da saúde</p>
-                </div>
-            </footer>
         </div>
     )
 }

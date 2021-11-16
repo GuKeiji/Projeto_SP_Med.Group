@@ -13,7 +13,18 @@ namespace senai.sp_med_group.webApi.Repositories
         SpMedContext ctx = new SpMedContext();
         public List<Medico> ListarTodos()
         {
-            return ctx.Medicos.ToList();
+            return ctx.Medicos.Select(p => new Medico()
+            {
+                IdMedico = p.IdMedico,
+                IdEspecializacao = p.IdEspecializacao,
+                IdInstituicao = p.IdInstituicao,
+                IdUsuario = p.IdUsuario,
+                Crm = p.Crm,
+                IdUsuarioNavigation = new Usuario()
+                {
+                    Nome = p.IdUsuarioNavigation.Nome
+                }
+            }).ToList();
         }
         public void Cadastrar(Medico novoMedico)
         {

@@ -136,7 +136,36 @@ namespace senai.sp_med_group.webApi.Repositories
 
         public List<Consultum> ListarTodas()
         {
-            return ctx.Consulta.ToList();
+            return ctx.Consulta.Select(p => new Consultum()
+                                {
+                                    DataConsulta = p.DataConsulta,
+                                    IdConsulta = p.IdConsulta,
+                                    Descricao = p.Descricao,
+                                    IdMedicoNavigation = new Medico()
+                                    {
+                                        Crm = p.IdMedicoNavigation.Crm,
+                                        IdUsuarioNavigation = new Usuario()
+                                        {
+                                            Nome = p.IdMedicoNavigation.IdUsuarioNavigation.Nome,
+                                            Email = p.IdMedicoNavigation.IdUsuarioNavigation.Email
+                                        }
+                                    },
+                                    IdPacienteNavigation = new Paciente()
+                                    {
+                                        Cpf = p.IdPacienteNavigation.Cpf,
+                                        Telefone = p.IdPacienteNavigation.Telefone,
+                                        IdUsuarioNavigation = new Usuario()
+                                        {
+                                            Nome = p.IdPacienteNavigation.IdUsuarioNavigation.Nome,
+                                            Email = p.IdPacienteNavigation.IdUsuarioNavigation.Email
+                                        }
+                                    },
+                                    IdSituacaoNavigation = new Situacao()
+                                    {
+                                        Descricao = p.IdSituacaoNavigation.Descricao
+                                    }
+                                })
+                                .ToList();
         }
 
         public void RemoverConsulta(int id)
