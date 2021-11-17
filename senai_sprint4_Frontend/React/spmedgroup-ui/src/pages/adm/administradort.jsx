@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
-
+import logo from '../../Assets/logo.png';
+import seringa from '../../Assets/seringa.png';
+import img_med from '../../Assets/img_form.png'
 
 import '../../CSS/estilo.css';
 
 export default function ConsultaAdm() {
-    const [listaConsul, setListaConsul] = useState([]);
-    const [listaMed, setListaMed] = useState([]);
-    const [listaPac, setListaPac] = useState([]);
+    const [listaConsulta, setListaConsulta] = useState([]);
+    const [listaMedico, setListaMedico] = useState([]);
+    const [listaPaciente, setListaPaciente] = useState([]);
     const [idPaciente, setIdPaciente] = useState('');
     const [idMedico, setIdMedico] = useState('');
-    const [dataConsul, setDataConsul] = useState('');
+    const [dataConsulta, setDataConsulta] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     function listarConsultas() {
@@ -21,7 +23,7 @@ export default function ConsultaAdm() {
         })
             .then(resposta => {
                 if (resposta.status === 200) {
-                    setListaConsul(resposta.data)
+                    setListaConsulta(resposta.data)
                 }
             })
 
@@ -38,7 +40,7 @@ export default function ConsultaAdm() {
         })
             .then(resposta => {
                 if (resposta.status === 200) {
-                    setListaMed(resposta.data)
+                    setListaMedico(resposta.data)
                 }
             })
 
@@ -55,8 +57,8 @@ export default function ConsultaAdm() {
         })
             .then(resposta => {
                 if (resposta.status === 200) {
-                    setListaPac(resposta.data.lista)
-                    console.log(listaPac)
+                    setListaPaciente(resposta.data.lista)
+                    console.log(listaPaciente)
                 }
             })
 
@@ -74,7 +76,7 @@ export default function ConsultaAdm() {
             .post('http://localhost:5000/api/Consultas', {
                 idPaciente: idPaciente,
                 idMedico: idMedico,
-                dataConsul: dataConsul
+                dataConsulta: dataConsulta
             }, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
@@ -85,118 +87,211 @@ export default function ConsultaAdm() {
                     console.log('Consulta cadastrada');
                     setIdMedico('');
                     setIdPaciente('');
-                    setDataConsul('');
+                    setDataConsulta('');
                     listarConsultas();
                     setIsLoading(false);
                 }
             })
-            .catch(erro => console.log(erro), setIdMedico(''), setIdPaciente(''), setDataConsul(''), setInterval(() => {
+            .catch(erro => console.log(erro), setIdMedico(''), setIdPaciente(''), setDataConsulta(''), setInterval(() => {
                 setIsLoading(false)
             }, 5000));
     }
 
     return (
-        <div>
-            <main className="container">
-                <div className="background_cadastrar">
-                    <div className="grid alinhar_box">
-                        <section className="container_form">
-                            <form onSubmit={cadastrarConsulta} className="alinhar_form">
-                                <h1>Cadastrar Consultas</h1>
-                                <div className="container_input espacamento">
-                                    <label htmlFor="paciente">Paciente</label>
-                                    <select
-                                        name="paciente"
-                                        id="paciente"
-                                        value={idPaciente}
-                                        onChange={(campo) => setIdPaciente(campo.target.value)}
-                                    >
-                                        <option value="0">Selecione o Paciente</option>
+        <div class="tela_paciente">
+            <header class="header_tela_paciente">
+                <div class="container_header">
+                    <img class="logo_header" src={logo} alt="logo"></img>
+                    <div class="container_links">
+                        <span>Home</span>
+                        <span>Consultas</span>
+                        <span>Sign-up</span>
+                        <span>Sair</span>
+                    </div>
+                </div>
+            </header>
+            <main class="container_main">
+                <div class="titulo_pagina_box container">
+                    <h1>Minhas Consultas</h1>
+                    <img class="icone_injecao" src={seringa} alt="Icone de uma seringa de injeção"></img>
+                </div>
+                <table class="tabela_consultas">
+                    <thead class="tabela_consultas_thead">
+                        <tr>
+                            <th>Médico</th>
+                            <th>Paciente</th>
+                            <th>Situação</th>
+                            <th>Data a Consulta</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {listaConsulta.map((consulta) => {
+                            return (
+                                <tr key={consulta.idConsulta}>
+                                    <td>{consulta.idMedicoNavigation.idUsuarioNavigation.nome}</td>
+                                    <td>{consulta.idPacienteNavigation.idUsuarioNavigation.nome}</td>
+                                    <td>{consulta.idSituacaoNavigation.descricao}</td>
+                                    <td>{Intl.DateTimeFormat("pt-BR", {
+                                        year: 'numeric', month: 'numeric', day: 'numeric',
+                                        hour: 'numeric', minute: 'numeric', hour12: false
+                                    }).format(new Date(consulta.dataConsulta))}</td>
+                                    <td>{consulta.descricao}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+                <div class="cadastrar_consulta_box">
+                    <h2>Nova Consulta</h2>
+                    <div class="organizar_form">
+                        <form onSubmit={cadastrarConsulta} class="form_cadastrar">
+                            <select
+                                className="input_select"
+                                name="medico"
+                                id="medico"
+                                value={idMedico}
+                                onChange={(campo) => setIdMedico(campo.target.value)}
+                            >
+                                <option value="0">Nome Médico</option>
 
-                                        {listaPac.map((paciente) => {
-                                            return (
-                                                <option key={paciente.idPaciente} value={paciente.idPaciente}>
-                                                    {paciente.idUsuarioNavigation.nome}
-                                                </option>
-                                            )
-                                        })}
+                                {listaMedico.map((medico) => {
+                                    return (
+                                        <option key={medico.idMedico} value={medico.idMedico}>
+                                            {medico.idUsuarioNavigation.nome}
+                                        </option>
+                                    )
+                                })}
+                            </select>
+                            <select
+                                className="input_select"
+                                name="paciente"
+                                id="paciente"
+                                value={idPaciente}
+                                onChange={(campo) => setIdPaciente(campo.target.value)}
+                            >
+                                <option value="0">Nome Paciente</option>
 
-                                    </select>
-                                </div>
-                                <div className="container_input">
-                                    <label htmlFor="medico">Médico</label>
-                                    <select
-                                        name="medico"
-                                        id="medico"
-                                        value={idMedico}
-                                        onChange={(campo) => setIdMedico(campo.target.value)}
-                                    >
-                                        <option value="0">Selecione o Médico</option>
+                                {listaPaciente.map((paciente) => {
+                                    return (
+                                        <option key={paciente.idPaciente} value={paciente.idPaciente}>
+                                            {paciente.idUsuarioNavigation.nome}
+                                        </option>
+                                    )
+                                })}
 
-                                        {listaMed.map((medico) => {
-                                            return (
-                                                <option key={medico.idMedico} value={medico.idMedico}>
-                                                    {medico.idUsuarioNavigation.nome}
-                                                </option>
-                                            )
-                                        })}
-                                    </select>
-                                </div>
-                                <div className="container_input">
-                                    <label htmlFor="data">Data</label>
-                                    <input
-                                        type="datetime-local"
-                                        name="data"
-                                        value={dataConsul}
-                                        onChange = {(campo) => setDataConsul(campo.target.value)}
-                                    />
-                                </div>
+                            </select>
+                            {/* <input class="input_cadastrar" placeholder="Descrição" type="text"/> */}
+                            <input
+                                className="input_cadastrar_data"
+                                type="datetime-local"
+                                name="data"
+                                value={dataConsulta}
+                                onChange={(campo) => setDataConsulta(campo.target.value)}
+                            />
+                            <div class="organizar_btn_cadastrar">
                                 {isLoading && (
-                                    <button disabled className='btn' type = 'submit'>
+                                    <button disabled className='btn_enviar' type='submit'>
                                         Carregando...
                                     </button>
                                 )}
-                                {!isLoading &&(
-                                    <button className='btn' type='submit'>
+                                {!isLoading && (
+                                    <button className='btn_enviar' type='submit'>
                                         Cadastrar
                                     </button>
                                 )}
-                            </form>
-                        </section>
-                    </div>
-                </div>
-                <div className="background_consulta">
-                    <div className="grid alinhar_consulta">
-                        <section className="container_tabela">
-                            <h2>Consultas Agendadas</h2>
-                            <table className="tabela">
-                                <thead>
-                                    <tr>
-                                        <th>Médico</th>
-                                        <th>Paciente</th>
-                                        <th>Descrição</th>
-                                        <th>Status</th>
-                                        <th>Data</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {listaConsul.map((consulta) => {
-                                        return(
-                                            <tr key={consulta.idConsulta}>
-                                                <td>{consulta.idMedicoNavigation.idUsuarioNavigation.nome}</td>
-                                                <td>{consulta.idPacienteNavigation.idUsuarioNavigation.nome}</td>
-                                                <td>{consulta.descricao}</td>
-                                                <td>{consulta.idSituacaoNavigation.descricao}</td>
-                                                <td>{consulta.dataConsul}</td>
-                                            </tr>
-                                        )
-                                    })}
-                                </tbody>
-                            </table>
-                        </section>
+                            </div>
+                        </form>
+                        <img class="img_form" src={img_med} alt="Imagem de um Médico"></img>
                     </div>
                 </div>
             </main>
+            <footer class="footer_tela_paciente">
+
+                <div class="container_footer">
+                    <ul class="lista_footer">
+                        <li>Serviços</li>
+                        <li>Consultas</li>
+                        <li>Exames</li>
+                        <li>Check-ups</li>
+                        <li>Vacinas</li>
+                        <li>Cirurgias</li>
+                    </ul>
+                    <img class="logo_header" src={logo} alt="logo" />
+                    <p>Salvar vidas e cuidar das pessoas porque elas não podem esperar nas filas da saúde</p>
+                </div>
+            </footer>
         </div>
     )
 }
+
+
+// LISTAGEM DE CONSULTA
+{/* {listaConsulta.map((consulta) => {
+    return(
+        <tr key={consulta.idConsulta}>
+        <td>{consulta.idMedicoNavigation.idUsuarioNavigation.nome}</td>
+        <td>{consulta.idPacienteNavigation.idUsuarioNavigation.nome}</td>
+        <td>{consulta.descricao}</td>
+        <td>{consulta.idSituacaoNavigation.descricao}</td>
+        <td>{consulta.dataConsulta}</td>
+        </tr>
+        )
+    })} */}
+
+// BOTÃO CADASTRAR
+{/* {isLoading && (
+        <button disabled className='btn' type = 'submit'>
+        Carregando...
+        </button>
+        )}
+        {!isLoading &&(
+            <button className='btn' type='submit'>
+            Cadastrar
+            </button>
+        )} */}
+
+//SELECT DE MÉDICO
+{/* <select
+            name="medico"
+            id="medico"
+            value={idMedico}
+            onChange={(campo) => setIdMedico(campo.target.value)}
+            >
+            <option value="0">Selecione o Médico</option>
+            
+            {listaMedico.map((medico) => {
+                return (
+                    <option key={medico.idMedico} value={medico.idMedico}>
+                    {medico.idUsuarioNavigation.nome}
+                    </option>
+                    )
+                })}
+            </select> */}
+
+// SELECT DE PACIENTE
+{/* <select
+                name="paciente"
+                id="paciente"
+                value={idPaciente}
+                onChange={(campo) => setIdPaciente(campo.target.value)}
+                >
+                <option value="0">Selecione o Paciente</option>
+                
+                {listaPaciente.map((paciente) => {
+                    return (
+                        <option key={paciente.idPaciente} value={paciente.idPaciente}>
+                        {paciente.idUsuarioNavigation.nome}
+                        </option>
+                        )
+                    })}
+                    
+                </select> */}
+
+// INPUT DE DATA
+{/* <input
+                    type="datetime-local"
+                    name="data"
+                    value={dataConsulta}
+                    onChange = {(campo) => setDataConsulta(campo.target.value)}
+                    /> */}

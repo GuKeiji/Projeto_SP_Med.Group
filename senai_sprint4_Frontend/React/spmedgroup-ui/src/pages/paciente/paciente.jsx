@@ -37,7 +37,7 @@ export default function Paciente() {
                         </div>
                     </div>
                 </header>
-                <main class="container_main">
+                <main class="container_main_paciente">
                     <div class="titulo_pagina_box container">
                         <h1>Minhas Consultas</h1>
                         <img class="icone_injecao" src={seringa} alt="Icone de uma seringa de injeção"></img>
