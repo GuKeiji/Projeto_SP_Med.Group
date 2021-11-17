@@ -82,7 +82,7 @@ export default function ConsultaAdm() {
                     'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
                 }
             })
-            .then(resposta => {
+            .then((resposta) => {
                 if (resposta.status === 201) {
                     console.log('Consulta cadastrada');
                     setIdMedico('');

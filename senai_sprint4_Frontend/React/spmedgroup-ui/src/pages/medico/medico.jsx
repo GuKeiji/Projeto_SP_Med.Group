@@ -51,14 +51,14 @@ export default function Medico() {
 
         event.preventDefault();
 
-        axios.patch("http://localhost:5000/api/Consultas/AlterarDescricao" + idConsulta, {
+        axios.patch("http://localhost:5000/api/Consultas/AlterarDescricao/" + idConsulta, {
             descricao: descricao
         }, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('usuario-login')
             }
         })
-            .then(resposta => {
+            .then((resposta) => {
                 if (resposta.status === 201) {
                     console.log('Descrição alterada');
 
