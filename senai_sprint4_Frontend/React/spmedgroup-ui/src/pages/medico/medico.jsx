@@ -4,6 +4,7 @@ import '../../CSS/estilo.css';
 import logo from '../../Assets/logo.png';
 import seringa from '../../Assets/seringa.png';
 import icon_edit from '../../Assets/icon_edit.png'
+import { Link } from 'react-router-dom';
 
 export default function Medico() {
     const [listaConsul, setListaConsul] = useState([]);
@@ -78,10 +79,10 @@ export default function Medico() {
                     <div class="container_header">
                         <img class="logo_header" src={logo} alt="logo"></img>
                         <div class="container_links">
-                            <span>Home</span>
-                            <span>Consultas</span>
-                            <span>Sign-up</span>
-                            <span>Sair</span>
+                        <Link to='/'>Home</Link>
+                        <Link to='/adm'>Consultas</Link>
+                        <Link to='/'>Sign-up</Link>
+                        <button>Sair</button>
                         </div>
                     </div>
                 </header>

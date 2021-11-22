@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../CSS/estilo.css';
 import logo from '../../Assets/logo.png';
 import seringa from '../../Assets/seringa.png';
+import { Link } from 'react-router-dom';
 
 export default function Paciente() {
     const [listaMinhasConsultas, setListaMinhasConsultas] = useState([]);
@@ -30,10 +31,10 @@ export default function Paciente() {
                     <div class="container_header">
                         <img class="logo_header" src={logo} alt="logo"></img>
                         <div class="container_links">
-                            <span>Home</span>
-                            <span>Consultas</span>
-                            <span>Sign-up</span>
-                            <span>Sair</span>
+                        <Link to='/'>Home</Link>
+                        <Link to='/adm'>Consultas</Link>
+                        <Link to='/'>Sign-up</Link>
+                        <button>Sair</button>
                         </div>
                     </div>
                 </header>
