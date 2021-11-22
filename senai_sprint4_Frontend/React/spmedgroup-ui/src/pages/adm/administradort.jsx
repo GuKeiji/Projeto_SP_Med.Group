@@ -5,7 +5,7 @@ import seringa from '../../Assets/seringa.png';
 import img_med from '../../Assets/img_form.png'
 
 import '../../CSS/estilo.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function ConsultaAdm() {
     const [listaConsulta, setListaConsulta] = useState([]);
@@ -15,6 +15,12 @@ export default function ConsultaAdm() {
     const [idMedico, setIdMedico] = useState('');
     const [dataConsulta, setDataConsulta] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    let history = useHistory();
+
+    function logout(){
+        localStorage.clear();
+        history.push('/');
+    }
 
     function listarConsultas() {
         axios('http://localhost:5000/api/Consultas', {
@@ -107,7 +113,7 @@ export default function ConsultaAdm() {
                         <Link className='container_links_link' to='/'>Home</Link>
                         <Link className='container_links_link' to='/adm'>Consultas</Link>
                         <Link className='container_links_link' to='/'>Sign-up</Link>
-                        <button className='container_links_button' >Sair</button>
+                        <button className='container_links_button' onClick={logout} >Sair</button>
                     </div>
                 </div>
             </header>
