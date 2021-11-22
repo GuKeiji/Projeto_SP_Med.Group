@@ -37,6 +37,7 @@ export default class Login extends Component {
           console.log(base64);
           console.log(this.props);
           console.log(parseJwt().role)
+          console.log(parseJwt())
           if (parseJwt().role === '1') {
             this.props.history.push('/medico')
           } else if (parseJwt().role === '2') {
