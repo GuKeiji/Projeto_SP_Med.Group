@@ -97,8 +97,6 @@
 
 /* FIM TELA LOGIN */
 
-/* TELA PACIENTE */
-
 .tela_paciente {
     align-items: center;
     width: 100vw;
@@ -268,12 +266,6 @@
     justify-content: space-around;
 }
 
-/* .titulo_select{
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-} */
-
 .input_select{
     border-top: none;
     border-right: none;
@@ -298,7 +290,6 @@
 
 .input_cadastrar:focus, input:focus, select:focus {
     box-shadow: 0;
-    /* border: 0 none; */
     outline: 0;
     border-bottom: 1px solid white;
 }
@@ -325,7 +316,6 @@
     background: #0e88ae;
     height: 100%;
     background-image: url(../Assets/calendar.png);
-    /* background: no-repeat; */
     width: 10px;
     height: 12px;
 }
@@ -384,7 +374,6 @@
     align-items: center;
     width: 80%;
     height: 100%;
-    /* background-color: tomato; */
 }
 
 .container_footer p {
@@ -400,6 +389,21 @@
     font-size: 14.3px;
     color: #007397;
     margin-left: 17px;
+}
+
+@media (max-width: 768px){
+
+    .img_form{
+        display: none;
+    }
+    
+    .organizar_form{
+        display: flex;
+        justify-content: center;
+        /* background-color: blueviolet; */
+        width: 80%;
+        height: 350px;
+    }
 }
 
 /*   
