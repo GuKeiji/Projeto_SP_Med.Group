@@ -24,8 +24,8 @@ export default function Stack() {
           headerShown: false,
         }}>
         <AuthStack.Screen name="Login" component={Login} />
-        {/* <AuthStack.Screen name="Pacientes" component={Pacientes} />
-        <AuthStack.Screen name="Medicos" component={Medicos} /> */}
+        <AuthStack.Screen name="Pacientes" component={Pacientes} />
+        <AuthStack.Screen name="Medicos" component={Medicos} />
       </AuthStack.Navigator>
     </NavigationContainer>
   );

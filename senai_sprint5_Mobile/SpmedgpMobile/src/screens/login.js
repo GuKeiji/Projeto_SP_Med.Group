@@ -12,13 +12,14 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../services/api';
+import jwtDecode from 'jwt-decode';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'alexandre@gmail.com',
-            senha: 'alexandre223',
+            email: '',
+            senha: '',
         };
     }
 
@@ -32,10 +33,21 @@ export default class Login extends Component {
             const token = resposta.data.token;
             console.warn(token);
             await AsyncStorage.setItem('userToken', token);
+            const Role = jwtDecode(token).role;
+            console.warn(Role);
 
-            // if (resposta.status == 200) {
-            //     this.props.navigation.navigate('Medicos');
-            // }
+            if (resposta.status == 200) {
+
+                if (Role == 1) {
+                    this.props.navigation.navigate('Medicos');
+                }
+
+                if (Role == 2) {
+                    this.props.navigation.navigate('Pacientes');
+                }
+
+            }
+
 
         } catch (error) {
             console.warn(error);
