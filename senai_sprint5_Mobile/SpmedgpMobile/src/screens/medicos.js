@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import {
     StyleSheet,
     Text,
@@ -8,9 +9,10 @@ import {
     ImageBackground,
     FlatList,
     TextInput,
+    ScrollView,
 } from 'react-native';
 
-
+import { NavigationContainer } from '@react-navigation/native';
 import {
     createDrawerNavigator,
     DrawerContentScrollView,
@@ -18,11 +20,10 @@ import {
     DrawerItem,
 } from '@react-navigation/drawer';
 
-import { NavigationContainer } from '@react-navigation/native';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../services/api';
+import Main from './main';
 
 export default class Medicos extends Component {
     constructor(props) {
@@ -45,12 +46,12 @@ export default class Medicos extends Component {
                 const listaDeConsultas = resposta.data.listaConsulta
                 this.setState({ listaConsultas: listaDeConsultas });
             }
-            // console.warn(this.state.listaConsultas)
         }
 
         catch (error) {
             console.warn(error)
         }
+
     }
 
     componentDidMount() {
@@ -67,54 +68,14 @@ export default class Medicos extends Component {
                         <Image style={styles.logo}
                             source={require('../../Assets/logo.png')}>
                         </Image>
-                        <Image style={styles.menu_hamburguer}
-                            source={require('../../Assets/menu_hamburger.png')}></Image>
+                        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+                            <Image style={styles.menu_hamburguer}
+                                source={require('../../Assets/menu_hamburger.png')}></Image>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.main}>
-                    {/* <View style={styles.container_consultas}>
-                        <View style={styles.container_consulta}>
-                            <View style={styles.container_dados}>
-                                <Text style={styles.titulos}>Paciente</Text>
-                                <Text style={styles.dados}>Helenice</Text>
-                            </View>
-                            <View style={styles.container_dados}>
-                                <Text style={styles.titulos}>Situação</Text>
-                                <Text style={styles.dados}>Agendada</Text>
-                            </View>
-                            <View style={styles.container_dados}>
-                                <Text style={styles.titulos}>Data da Consulta</Text>
-                                <Text style={styles.dados}>04/10/22</Text>
-                            </View>
-                            <View style={styles.container_dados}>
-                                <Text style={styles.titulos}>Descrição</Text>
-                            </View>
-                            <Text style={styles.descricao}>Presencial</Text>
-                        </View>
-                    </View> */}
-                    {/* <View style={styles.container_consultas}>
-                        <View style={styles.container_consulta}>
-                            <View style={styles.container_dados}>
-                                <Text style={styles.titulos}>Paciente</Text>
-                                <Text style={styles.dados}>Helenice</Text>
-                            </View>
-                            <View style={styles.container_dados}>
-                                <Text style={styles.titulos}>Situação</Text>
-                                <Text style={styles.dados}>Agendada</Text>
-                            </View>
-                            <View style={styles.container_dados}>
-                                <Text style={styles.titulos}>Data da Consulta</Text>
-                                <Text style={styles.dados}>04/10/22</Text>
-                            </View>
-                            <View style={styles.container_dados}>
-                                <Text style={styles.titulos}>Descrição</Text>
-                            </View>
-                            <Text style={styles.descricao}>Presencial</Text>
-                        </View>
-                    </View> */}
-
                     <FlatList
-                        // contentContainerStyle={styles.container_consultas}
                         data={this.state.listaConsultas}
                         keyExtractor={item => item.idConsulta}
                         renderItem={this.renderItem}
@@ -146,7 +107,7 @@ export default class Medicos extends Component {
             </View>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     //body
@@ -238,53 +199,3 @@ const styles = StyleSheet.create({
 
 })
 
-// import React, { useState, useEffect } from 'react';
-// import {
-//     StyleSheet,
-//     Text,
-//     TouchableOpacity,
-//     View,
-//     Image,
-//     FlatList,
-//     ImageBackground,
-//     TextInput,
-// } from 'react-native';
-
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-
-// import api from '../services/api';
-
-
-// function Medicos() {
-//     const [listaConsultas, setListaConsultas] = useState();
-
-//     async function buscarConsultas() {
-//         console.warn('Buscando consultas...')
-//         const token = await AsyncStorage.getItem('userToken');
-
-//         const response = await api('/Medicos', {
-//             headers: {
-//                 Authorization: 'Bearer ' + token
-//             }
-//         })
-
-//         if (response.status === 200) {
-//             setListaConsultas(resposta.data)
-//         }
-//     }
-
-//     useEffect(buscarConsultas, [])
-
-//     return (
-//         <View>
-//             <Text>Médicos</Text>
-//         </View>
-//     )
-// }
-
-// const styles = StyleSheet.create({
-
-
-// })
-
-// export default Medicos;
