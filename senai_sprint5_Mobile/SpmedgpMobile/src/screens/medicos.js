@@ -10,6 +10,16 @@ import {
     TextInput,
 } from 'react-native';
 
+
+import {
+    createDrawerNavigator,
+    DrawerContentScrollView,
+    DrawerItemList,
+    DrawerItem,
+} from '@react-navigation/drawer';
+
+import { NavigationContainer } from '@react-navigation/native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../services/api';
@@ -62,7 +72,7 @@ export default class Medicos extends Component {
                     </View>
                 </View>
                 <View style={styles.main}>
-                    <View style={styles.container_consultas}>
+                    {/* <View style={styles.container_consultas}>
                         <View style={styles.container_consulta}>
                             <View style={styles.container_dados}>
                                 <Text style={styles.titulos}>Paciente</Text>
@@ -81,14 +91,65 @@ export default class Medicos extends Component {
                             </View>
                             <Text style={styles.descricao}>Presencial</Text>
                         </View>
-                    </View>
+                    </View> */}
+                    {/* <View style={styles.container_consultas}>
+                        <View style={styles.container_consulta}>
+                            <View style={styles.container_dados}>
+                                <Text style={styles.titulos}>Paciente</Text>
+                                <Text style={styles.dados}>Helenice</Text>
+                            </View>
+                            <View style={styles.container_dados}>
+                                <Text style={styles.titulos}>Situação</Text>
+                                <Text style={styles.dados}>Agendada</Text>
+                            </View>
+                            <View style={styles.container_dados}>
+                                <Text style={styles.titulos}>Data da Consulta</Text>
+                                <Text style={styles.dados}>04/10/22</Text>
+                            </View>
+                            <View style={styles.container_dados}>
+                                <Text style={styles.titulos}>Descrição</Text>
+                            </View>
+                            <Text style={styles.descricao}>Presencial</Text>
+                        </View>
+                    </View> */}
+
+                    <FlatList
+                        // contentContainerStyle={styles.container_consultas}
+                        data={this.state.listaConsultas}
+                        keyExtractor={item => item.idConsulta}
+                        renderItem={this.renderItem}
+                    />
                 </View>
             </View>
         )
     }
+
+    renderItem = ({ item }) => (
+        <View style={styles.container_consultas}>
+            <View style={styles.container_consulta}>
+                <View style={styles.container_dados}>
+                    <Text style={styles.titulos}>Paciente</Text>
+                    <Text style={styles.dados}>{item.idPacienteNavigation.idUsuarioNavigation.nome}</Text>
+                </View>
+                <View style={styles.container_dados}>
+                    <Text style={styles.titulos}>Situação</Text>
+                    <Text style={styles.dados}>{item.idSituacaoNavigation.descricao}</Text>
+                </View>
+                <View style={styles.container_dados}>
+                    <Text style={styles.titulos}>Data da Consulta</Text>
+                    <Text style={styles.dados}>{moment(item.dataConsulta).format('L')}</Text>
+                </View>
+                <View style={styles.container_dados}>
+                    <Text style={styles.titulos}>Descrição</Text>
+                </View>
+                <Text style={styles.descricao}>{item.descricao}</Text>
+            </View>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
+    //body
     body: {
         width: '100%',
         height: '100%',
@@ -98,7 +159,7 @@ const styles = StyleSheet.create({
     header: {
         // flexDirection: 'row',
         backgroundColor: '#5049A9',
-        height: '8%',
+        height: 50,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -122,14 +183,16 @@ const styles = StyleSheet.create({
 
     //main
     main: {
-        backgroundColor: '#f1f1f1',
+        // backgroundColor: '#ff0000',
         alignItems: 'center',
+        width: '100%',
+        // height: 629
     },
 
     container_consultas: {
         // backgroundColor: '#00ff00',
-        width: '90%',
-        height: '50%',
+        width: 300,
+        height: 144,
         marginTop: 25,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -137,8 +200,8 @@ const styles = StyleSheet.create({
 
     container_consulta: {
         backgroundColor: '#5049A9',
-        width: '48%',
-        height: '100%',
+        width: '100%',
+        height: 144,
         borderRadius: 6,
         alignItems: 'center',
         justifyContent: 'center'
@@ -148,7 +211,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: '90%',
-        height: '10%',
+        height: 20,
     },
 
     titulos: {
@@ -156,18 +219,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
     },
-    
+
     dados: {
         fontSize: 12,
         fontWeight: 'light',
         color: '#fff',
-        
     },
-    
+
     descricao: {
+        // backgroundColor: '#ff0000',
         alignItems: 'flex-start',
         width: '90%',
-        height: '55%',
+        height: 50,
         fontSize: 12,
         fontWeight: 'light',
         color: '#fff',

@@ -9,13 +9,14 @@ import {
 
 import Medico from './medicos';
 import Paciente from './pacientes';
+import Login from './login';
 
 const Drawer = createDrawerNavigator();
 
 export default function Main() {
     return (
         <Drawer.Navigator
-            initialRouteName="Perfil"
+            initialRouteName="Login"
             screenOptions={{
                 drawerHideStatusBarOnOpen: true,
                 drawerStatusBarAnimation: 'fade',
