@@ -24,6 +24,12 @@ export default class Pacientes extends Component {
         };
     }
 
+    logout = async () => {
+        await AsyncStorage.removeItem('userToken');
+        navigation.navigate('Login');
+        console.warn('Usuário deslogado')
+    }
+
     buscarConsultas = async () => {
         try {
             const token = await AsyncStorage.getItem('userToken');
@@ -58,11 +64,17 @@ export default class Pacientes extends Component {
                         <Image style={styles.logo}
                             source={require('../../Assets/logo.png')}>
                         </Image>
-                        <Image style={styles.menu_hamburguer}
-                            source={require('../../Assets/menu_hamburger.png')}></Image>
+                        <TouchableOpacity onPress={this.logout}>
+                            <Text style={styles.logout_text}>Logout</Text>
+                            {/* <Image style={styles.menu_hamburguer}
+                                source={require('../../Assets/menu_hamburger.png')}></Image> */}
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.main}>
+                    <TouchableOpacity style={styles.btn_atualizar} onPress={this.buscarConsultas}>
+                        <Text style={styles.btn_atualizar_text}>Atualizar</Text>
+                    </TouchableOpacity>
                     <FlatList
                         data={this.state.listaConsultas}
                         keyExtractor={item => item.idConsulta}
@@ -100,8 +112,7 @@ export default class Pacientes extends Component {
 const styles = StyleSheet.create({
     //body
     body: {
-        width: '100%',
-        height: '100%',
+        flex: 1,
     },
 
     //header
@@ -125,6 +136,10 @@ const styles = StyleSheet.create({
         height: 25,
     },
 
+    logout_text: {
+        color: '#ffffff'
+    },
+
     menu_hamburguer: {
         width: 25,
         height: 25,
@@ -135,7 +150,24 @@ const styles = StyleSheet.create({
         // backgroundColor: '#ff0000',
         alignItems: 'center',
         width: '100%',
+        flex: 1,
         // height: 629
+    },
+
+    btn_atualizar: {
+        backgroundColor: '#5049A9',
+        width: 70,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 30,
+        marginBottom: 5,
+        borderRadius: 6,
+    },
+
+    btn_atualizar_text: {
+        color: '#fff',
+        fontWeight: 'bold',
     },
 
     container_consultas: {

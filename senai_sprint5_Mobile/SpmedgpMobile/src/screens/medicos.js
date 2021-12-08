@@ -12,18 +12,9 @@ import {
     ScrollView,
 } from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
-import {
-    createDrawerNavigator,
-    DrawerContentScrollView,
-    DrawerItemList,
-    DrawerItem,
-} from '@react-navigation/drawer';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../services/api';
-import Main from './main';
 
 export default class Medicos extends Component {
     constructor(props) {
@@ -35,6 +26,8 @@ export default class Medicos extends Component {
 
     buscarConsultas = async () => {
         try {
+            // console.warn('Buscando...')
+
             const token = await AsyncStorage.getItem('userToken');
 
             const resposta = await api.get('/Consultas/Lista/Minhas', {
@@ -54,6 +47,12 @@ export default class Medicos extends Component {
 
     }
 
+    logout = async () => {
+        await AsyncStorage.removeItem('userToken');
+        navigation.navigate('Login');
+        console.warn('Usuário deslogado')
+    }
+
     componentDidMount() {
         this.buscarConsultas();
     }
@@ -68,13 +67,17 @@ export default class Medicos extends Component {
                         <Image style={styles.logo}
                             source={require('../../Assets/logo.png')}>
                         </Image>
-                        <TouchableOpacity onPress={() => navigation.openDrawer()}>
-                            <Image style={styles.menu_hamburguer}
-                                source={require('../../Assets/menu_hamburger.png')}></Image>
+                        <TouchableOpacity onPress={this.logout}>
+                            <Text style={styles.logout_text}>Logout</Text>
+                            {/* <Image style={styles.menu_hamburguer}
+                                source={require('../../Assets/menu_hamburger.png')}></Image> */}
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style={styles.main}>
+                    <TouchableOpacity style={styles.btn_atualizar} onPress={this.buscarConsultas}>
+                        <Text style={styles.btn_atualizar_text}>Atualizar</Text>
+                    </TouchableOpacity>
                     <FlatList
                         data={this.state.listaConsultas}
                         keyExtractor={item => item.idConsulta}
@@ -112,8 +115,7 @@ export default class Medicos extends Component {
 const styles = StyleSheet.create({
     //body
     body: {
-        width: '100%',
-        height: '100%',
+        flex: 1,
     },
 
     //header
@@ -137,6 +139,10 @@ const styles = StyleSheet.create({
         height: 25,
     },
 
+    logout_text: {
+        color: '#fff'
+    },
+
     menu_hamburguer: {
         width: 25,
         height: 25,
@@ -147,11 +153,27 @@ const styles = StyleSheet.create({
         // backgroundColor: '#ff0000',
         alignItems: 'center',
         width: '100%',
+        flex: 1,
         // height: 629
     },
 
+    btn_atualizar: {
+        backgroundColor: '#5049A9',
+        width: 70,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 30,
+        marginBottom: 5,
+        borderRadius: 6,
+    },
+
+    btn_atualizar_text: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
+
     container_consultas: {
-        // backgroundColor: '#00ff00',
         width: 300,
         height: 144,
         marginTop: 25,
