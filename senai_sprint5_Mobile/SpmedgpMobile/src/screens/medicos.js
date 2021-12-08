@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useNavigation } from "@react-navigation/native";
 import moment from 'moment';
 import {
     StyleSheet,
@@ -47,10 +48,10 @@ export default class Medicos extends Component {
 
     }
 
+    
     logout = async () => {
         await AsyncStorage.removeItem('userToken');
-        navigation.navigate('Login');
-        console.warn('Usuário deslogado')
+        this.props.navigation.navigate('Login');
     }
 
     componentDidMount() {
