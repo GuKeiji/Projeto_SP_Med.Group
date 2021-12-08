@@ -18,14 +18,13 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'roberto.possarle@spmedicalgroup.com.br',
-            senha: 'roberto913',
+            email: '',
+            senha: '',
         };
     }
 
     realizarLogin = async () => {
         try {
-            console.warn('Cheguei aqui :)');
             const resposta = await api.post('/Login', {
                 emailUsuario: this.state.email,
                 senhaUsuario: this.state.senha,
@@ -35,13 +34,15 @@ export default class Login extends Component {
             await AsyncStorage.setItem('userToken', token);
             const Role = jwtDecode(token).role;
             console.warn(Role);
+            this.setState({email: ''})
+            this.setState({senha: ''})            
 
             if (resposta.status == 200) {
 
                 if (Role == 1) {
                     this.props.navigation.navigate('Medicos');
                 }
-
+                
                 if (Role == 2) {
                     this.props.navigation.navigate('Pacientes');
                 }

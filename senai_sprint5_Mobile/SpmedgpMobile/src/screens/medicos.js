@@ -141,7 +141,8 @@ const styles = StyleSheet.create({
     },
 
     logout_text: {
-        color: '#fff'
+        color: '#fff',
+        textTransform: 'uppercase',
     },
 
     menu_hamburguer: {
