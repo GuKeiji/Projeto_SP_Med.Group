@@ -33,11 +33,11 @@ namespace senai.sp_med_group.webApi.Context
             if (!optionsBuilder.IsConfigured)
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=PC-GAMER-GUKEIJ\\SQLEXPRESS; Initial Catalog=SP_MED_GROUP_KEIJI; user id=sa; pwd=senai@132;");
+                //optionsBuilder.UseSqlServer("Data Source=PC-GAMER-GUKEIJ\\SQLEXPRESS; Initial Catalog=SP_MED_GROUP_KEIJI; user id=sa; pwd=senai@132;");
                 //optionsBuilder.UseSqlServer("Server = tcp:spmedgp-tarde.database.windows.net, 1433; Initial Catalog = SP_MED_GROUP_KEIJI; Persist Security Info = False; User ID = senai-tarde; Password = spmedgp@132; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
                 //optionsBuilder.UseSqlServer("Data Source=NOTE0113E5\\SQLEXPRESS; Initial Catalog=SP_MED_GROUP_KEIJI; user id=sa; pwd=Senai@132;");
                 //optionsBuilder.UseSqlServer("Data Source=CYBERNOTE-02\\SQLEXPRESS; Initial Catalog=SP_MED_GROUP_KEIJI; user id=sa; pwd=Senai@132;");
-                //optionsBuilder.UseSqlServer("Data Source=NOTE0113F1\\SQLEXPRESS; Initial Catalog=SP_MED_GROUP_KEIJI; user id=sa; pwd=Senai@132;");
+                optionsBuilder.UseSqlServer("Data Source=NOTE0113F4\\SQLEXPRESS; Initial Catalog=SP_MED_GROUP_KEIJI; user id=sa; pwd=Senai@132;");
             }
         }
 
