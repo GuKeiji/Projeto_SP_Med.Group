@@ -111,7 +111,7 @@ export default function ConsultaAdm() {
                     <img class="logo_header" src={logo} alt="logo"></img>
                     <div class="container_links">
                         <Link className='container_links_link' to='/'>Home</Link>
-                        <Link className='container_links_link' to='/adm'>Consultas</Link>
+                        <Link className='container_links_link' to='/mapas'>Localizações</Link>
                         <Link className='container_links_link' to='/'>Sign-up</Link>
                         <button className='container_links_button' onClick={logout} >Sair</button>
                     </div>

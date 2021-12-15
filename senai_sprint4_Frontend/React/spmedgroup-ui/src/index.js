@@ -14,6 +14,7 @@ import Login from './pages/login/App'
 import Paciente from './pages/paciente/paciente'
 import Medico from './pages/medico/medico'
 import Adm from './pages/adm/administradort'
+import Mapas from './pages/mapas/mapas'
 
 // const PermissaoAdm = ({ component: Component }) => (
 //   <Route
@@ -62,6 +63,7 @@ const routing = (
         <Route path = "/paciente" component = {Paciente}/>
         <Route path = "/medico" component = {Medico}/>
         <Route path = "/adm" component = {Adm}/>
+        <Route path = "/mapas" component = {Mapas}/>
       </Switch>
     </div>
   </Router>
